@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Datarun</title>
+	<script
+		 src="https://code.jquery.com/jquery-3.5.1.js"
+		 integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+		 crossorigin="anonymous"></script>
+
+	<script type='text/javascript' src='js/break_infinity.js'></script>
+	<script type="text/javascript" src="js/static.js"></script>
+	<script type="text/javascript" src="js/messages.js"></script>
+	<script type="text/javascript" src="js/UI.js"></script>
+	<script type="text/javascript" src="js/datahandler.js"></script>
+	<script type="text/javascript" src="js/buildings.js"></script>
+	<script type="text/javascript" src="js/upgrades.js"></script>
+	<script type="text/javascript" src="js/core.js"></script>
+	<script type="text/javascript" src="js/helpers.js"></script>
+	<script type="text/javascript" src="js/cheats.js"></script>
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link id='font'     href="https://fonts.googleapis.com/css2?family=Roboto&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+  	<link id='fontMono' href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id='loading'>
+		<span class='big white'>Loading...</span>
+	</div>
+	<div class='game'>
+		<div class='header'>
+			<p class='white centered datatooltip'>data</p>
+			<p
+				fill='data.currency'
+				fill-event='update'
+				class='big mono white centered nm'>
+			</p>
+			<p class='white centered datatooltip'>/second:</p>
+			<p
+				fill='incomePerSecond'
+				fill-event='update'
+				class='big mono white centered nm'>
+			</p>
+
+		</div>
+		<div class='subheader'>
+			<div class='panel tabs'>
+				<div class='tab active mono iblock'>
+					<span class='white'>Infrastructure</span>
+				</div>
+			</div>
+		</div>
+		<div class='main'>
+
+		<div class='panel content'>
+			<div id='t1_buildings' class='toggleme'>
+				<div class='buildings container'>
+					<div class='panel tabs' id='building_amount' style='text-align: center'>
+						<div class='tab active mono iblock' buy='1'>
+							<span class='white'>x1</span>
+						</div>
+						<div class='tab mono iblock' buy='10'>
+							<span class='white'>x10</span>
+						</div>
+						<div class='tab mono iblock' buy='100'>
+							<span class='white'>x100</span>
+						</div>
+					</div>
+					<div id='buildings_all'>
+					</div>
+				</div>
+				<div class='upgrades container'>
+					<div class='panel tabs' style='text-align: center'>
+						<div class='tab active mono iblock' tab group='upgrades' key='buyable'>
+							<span class='white'>Buy</span>
+						</div>
+						<div class='tab mono iblock' tab group='upgrades' key='owned'>
+							<span class='white'>Owned</span>
+						</div>
+					</div>
+					<div id='upgrades_buyable' panel group='upgrades' key='buyable'>
+
+					</div>
+					<div id='upgrades_owned' panel group='upgrades' key='owned' style='display: none'>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class='footer'>
+			<div class='console'>
+			</div>
+		</div>
+	</div>
+	<div class='templates' style='display: none'>
+		<div class='building idme hidden'>
+			<div class='img iblock'>
+			</div>
+			<div class='data third iblock'>
+					<span class='name block white medium mono'></span>
+					<span
+						class='amount block white medium'
+						fill-event='call'
+						fill='data.buildings.{{buildingID}}.amount'>
+					</span>
+			</div>
+			<div class='production third iblock'>
+				<span
+					class='produces white medium mono block'
+					fill-event='call'
+					fill='buildings.{{buildingID}}.incomestring'
+				>
+				</span>
+				<span class='description white medium block'>
+				</span>
+			</div>
+			<div class='price third iblock'>
+				<span class='upgradeprice white big' fill-event='call' fill='buildings.{{buildingID}}.nextPrice'>
+				</span>
+				<div class='icon dt'></div>
+			</div>
+		</div>
+		<div class='upgrade idme hidden' for-upgrade='{{uID}}'>
+			<div class='img iblock'>
+			</div>
+			<div class='data third iblock'>
+				<span class='name block white medium mono'></span>
+				<span class='description block white medium'></span>
+			</div>
+			<div class='data third iblock'>
+				<span class='for block white medium'></span>
+				<span class='modifier block white medium'></span>
+			</div>
+			<div class='price third iblock'>
+				<span class='upgradeprice white big'>
+				</span>
+				<div class='icon dt'></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

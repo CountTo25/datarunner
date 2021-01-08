@@ -1,0 +1,280 @@
+.icon {
+  height: 32px;
+  width: 32px;
+}
+
+body {
+  background-color: #21252B;
+  font-family: 'Roboto', sans-serif;
+  margin: 0px;
+}
+
+span.white, p.white {
+  color: #e6e8e6;
+}
+
+span.big, p.big {
+  font-size: 32px;
+}
+
+span.medium, p.medium {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+span.centered, p.centered {
+  text-align: center;
+}
+
+#loading {
+  z-index: 9999;
+  width: 100vw;
+  height: 80vh;
+  position: absolute;
+  background-color: black;
+  left: 0px;
+  top: 0px;
+  text-align: center;
+  vertical-align: center;
+  padding-top: 20vh;
+}
+
+.building, .upgrade {
+    position: relative;
+  width: calc(100% - 12px);
+  border: 1px solid #e6e8e6;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #363c45;
+  cursor: pointer;
+  height: 32px;
+  margin-bottom: 3px;
+  user-select: none;
+  opacity: 1;
+  visibility: visible;
+  transition:
+              0.5s opacity 0.5s;
+
+}
+
+.building:hover, .upgrade:hover {
+  background-color: #21252B;
+}
+
+.iblock {
+  display: inline-block;
+}
+
+#t1_buildings .buildings, #t1_buildings .upgrades {
+  width: calc(50% - 2px);
+  display: inline-block;
+  vertical-align: top;
+}
+
+.upgrade {
+    height: max-content;
+}
+
+.upgrade .data {
+    margin-left: 5px;
+}
+
+.transform {
+    visibility: hidden;
+    height: 0px;
+    opacity: 0;
+}
+
+.upgrade.hidden, .upgrade.owned, .building.hidden {
+    display: none;
+    opacity: 0;
+}
+
+
+
+
+
+.block {
+  display: block;
+}
+
+.building .img {
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.building .price {
+  text-align: right;
+  position: absolute;
+  right: 5px;
+}
+
+.price span {
+    line-height: 32px;
+}
+
+.building div {
+  vertical-align: top;
+}
+
+.building .data {
+  display: inline-block;
+}
+
+.upgrade .img {
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.upgrade .price {
+    text-align: right;
+    position: absolute;
+    right: 5px;
+}
+
+.upgrade div {
+  vertical-align: top;
+}
+
+.upgrade .data {
+  display: inline-block;
+}
+
+div.icon.dt {
+  width: 32px;
+  height: 32px;
+  vertical-align: sub;
+  background-image: url('../img/data.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+}
+
+.panel.tabs {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.tab {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 3px;
+    width: min-content;
+    background-color: #21252B;
+    border: 1px solid #e6e8e6;
+    cursor: pointer;
+}
+
+.tab.active {
+    background-color: #363c45;
+}
+
+.tabs .tab:not(:first-of-type):not(:last-of-type) {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.tabs .tab:first-of-type {
+    margin-right: 5px;
+}
+
+.tabs.tab:last-of-type {
+    margin-left: 5px;
+}
+
+
+.upgrade .half, .building .half {
+    width: calc(50% - 16px);
+}
+
+.upgrade .third, .building .third {
+    width: calc(33% - 11px);
+}
+
+
+
+.mono {
+      font-family: 'Roboto Mono', monospace;
+}
+
+.datatooltip {
+    margin-bottom: 0px;
+}
+
+.nm {
+    margin: 0px;
+}
+
+
+.header {
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    position: fixed;
+    width: 100vw;
+    z-index: 100;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding-bottom: 20px;
+}
+
+.subheader {
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    width: 100vw;
+    z-index: 100;
+    border-bottom: 1px solid white;
+    background-color: #21252B;
+    padding-top: 10px;
+}
+
+.footer {
+    position: fixed;
+    width: 100vw;
+    bottom: 0px;
+    left: 0px;
+    height: 100px;
+    background-color: black;
+    border-top: 1px solid white;
+
+}
+
+.console span {
+    display: block;
+    font-size: 20px;
+    line-height: 25px;
+    font-family: 'Roboto Mono', monospace;
+    color: #008F11;
+    transition: 1s all;
+}
+
+.console span.flash {
+    color: white !important;
+}
+
+.console span hl {
+    cursor: pointer;
+    text-decoration: underline dotted;
+}
+
+hl.inactive {
+    cursor: default !important;
+    text-decoration: none !important;
+}
+
+.main {
+    overflow-y:scroll;
+    padding: 5px;
+}
+
+.console span::before {
+    content: '> ';
+}
