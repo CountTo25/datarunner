@@ -89,13 +89,11 @@ class UI {
         let highlight = msg.highlight;
         let ev = msg.ev;
         let toReturn = text;
-        console.log(msg);
-        console.log(toReturn);
         if (highlight !== null) {
             let baked = '<hl>'+highlight+'</hl>';
             toReturn = toReturn.replace(highlight, baked);
         }
-        console.log(toReturn);
+        toReturn = toReturn.randomize();
         let date = new Date();
         let timestamp = date.getHours().toString().padStart(2, '0')
             + ':'+date.getMinutes().toString().padStart(2, '0')
@@ -146,7 +144,11 @@ class UI {
     newNode.find('.name').html(upgrade.displayname);
     newNode.find('.upgradeprice').html(upgrade.price.toString());
     newNode.find('.description').html(upgrade.description);
-    newNode.find('.for').html('Affects '+upgrade.displayFor);
+    if (upgrade.for!='game')
+        newNode.find('.for').html('Affects '+upgrade.displayFor);
+    else {
+        newNode.find('.for').html(' ');
+    }
     newNode.find('.modifier').html(upgrade.effectDescription);
     newNode.attr('id', 'upgrade_'+upgrade.id);
     newNode.find('.img')

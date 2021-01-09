@@ -11,6 +11,7 @@ class Upgrade {
         this.applyTo = data.applyTo;
         this.effect = data.effect;
         this.effectDescription = data.effectDescription;
+        this.onPurchase = data.onPurchase;
         console.log('construct?');
 
         if (!window.game.data.upgrades[this.id])
@@ -21,7 +22,8 @@ class Upgrade {
     }
 
     get displayFor() {
-        return window.game.buildings[this.for].displayname;
+        if (this.for != 'game')
+            return window.game.buildings[this.for].displayname;
     }
 
     tryUnveil() {
@@ -62,6 +64,10 @@ class Upgrade {
             return false;
         let enoughData =
             !window.game.data.currency.lt(this.price);
+        if (this.onPurchase) {
+            this.onPurchase();
+            window.game.save(); //probably can bork itself? for now to keep stuff safe
+        }
         if (enoughData) {
             window.game.data.currency =
                 window.game.data.currency.minus(this.price);
