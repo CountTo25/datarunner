@@ -2,6 +2,7 @@ $(function() {
     document.fonts.ready.then(function() {
         console.log('font ready');
         new Game();
+        new RPG();
         window.game.UI.doPosition();
         window.game.UI.bindEvents();
         $('#loading').fadeOut();
@@ -12,8 +13,15 @@ $(function() {
 
 
 Decimal.prototype.toString = function() {
-  if (this.exponent>=6)
-    return Math.floor(this.mantissa*100)/100+(this.exponent>0?'e'+this.exponent:'');
+  if (this.exponent>=6) {
+      let mnt = Math.floor(this.mantissa*100)/100;
+      let needsTrail = (mnt % 1) == 0;
+      if (needsTrail)
+        mnt+='.00';
+      else
+        mnt=mnt.toString().padEnd(4, '0');
+      return mnt+'e'+this.exponent
+  }
   else
     return Math.floor(this.toNumber()).toString();
 }

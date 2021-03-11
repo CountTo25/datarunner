@@ -19,6 +19,7 @@
 	<script type="text/javascript" src="js/core.js"></script>
 	<script type="text/javascript" src="js/helpers.js"></script>
 	<script type="text/javascript" src="js/cheats.js"></script>
+	<script type="text/javascript" src="js/rpg.js"></script>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link id='font'     href="https://fonts.googleapis.com/css2?family=Roboto&family=Rubik+Mono+One&display=swap" rel="stylesheet">
@@ -47,12 +48,15 @@
 		</div>
 		<div class='subheader'>
 			<div class='panel tabs'>
-				<div class='tab active mono iblock'>
+				<div class='tab active mono iblock' tab group='modules' key='buildings'>
 					<span class='white'>Infrastructure</span>
+				</div>
+				<div class='tab mono iblock extrapad' tab group='modules' key='rpg' style='display: none'>
+					<span class='white'>AI</span>
 				</div>
 			</div>
 		</div>
-		<div class='main'>
+		<div class='main' panel group='modules' key='buildings'>
 
 		<div class='panel content'>
 			<div id='t1_buildings' class='toggleme'>
@@ -89,6 +93,20 @@
 				</div>
 			</div>
 		</div>
+		</div>
+		<div id='rpg' class='main' panel group='modules' key='rpg' style='display: none'>
+			<div class='rpg top'>
+				<span class='white medium mono block'>Evolution level: 0</span>
+				<span class='white medium mono block'>Progress: <span
+					 class='white medium mono iblock'
+					 fill='rpg.progress'
+					 fill-event='update'
+				></span>
+				</span>
+			</div>
+			<div class='rpg body'>
+
+			</div>
 		</div>
 		<div class='footer'>
 			<div class='console'>

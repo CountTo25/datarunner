@@ -8,6 +8,9 @@ class Game {
         'upgrades': {},
         'buildingBuyAmount' : 1,
         'eventTimer': 0,
+        'rpg': {
+            'unlocked': false,
+        },
     }
 
     let load = {
@@ -47,7 +50,7 @@ class Game {
     );
 
     this.slowInterval = setInterval(
-        this.UI.unveilBuildings.bind(this),
+        this.UI.updateUI.bind(this.UI),
         1000
     );
 
@@ -100,6 +103,9 @@ class Game {
         ...unpacked
     };
     this.data.currency = new Decimal().fromObject(unpacked.currency);
+    this.data.rpg.level = new Decimal().fromObject(unpacked.rpg.level || {'mantissa': 0, 'exponent': 0});
+    this.data.rpg.currentexp = new Decimal().fromObject(unpacked.rpg.currentexp || {'mantissa': 0, 'exponent': 0});
+    this.data.rpg.exptolevel = new Decimal().fromObject(unpacked.rpg.exptolevel || {'mantissa': 0, 'exponent': 0});
     this.UI.update('call');
   }
 

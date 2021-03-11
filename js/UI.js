@@ -28,7 +28,16 @@ class UI {
       let gameheight = both+10;
       gameheight+=$('.footer').outerHeight();
       gameheight = $(window).height()-gameheight;
+      let rpgheight = gameheight;
+      console.log(rpgheight);
+      $('#rpg').show();
+      $('#rpg').css('overflow-y', 'hidden');
+      rpgheight = rpgheight - $('.rpg.top').innerHeight();
+      $('#rpg').hide();
+      $('.rpg.body').css('height',rpgheight);
       $('.main').css('height', gameheight+'px');
+      if (window.game.data.rpg.unlocked)
+        $('[tab][key="rpg"]').show();
   }
 
   bindEvents() {
@@ -175,6 +184,10 @@ class UI {
     Object.entries(allBuildings).forEach(([key, value]) => {
         value.tryUnveil();
     });
+  }
+  updateUI() {
+      this.unveilBuildings();
+      this.unveilUpgrades();
   }
 
     rebuildUpgrade(upgrade) { // :Upgrade

@@ -128,7 +128,7 @@ class Static {
               unveiler: () => {
                 if (
                     window.game.data.buildings.cpu.amount>=5 &&
-                    window.game.data.currency.gte(new Decimal(100))
+                    window.game.data.currency.gte(new Decimal(50))
                 )
                     return true;
                 else
@@ -152,7 +152,7 @@ class Static {
               unveiler: () => {
                 if (
                     window.game.data.buildings.db.amount>=5 &&
-                    window.game.data.currency.gte(new Decimal(1000))
+                    window.game.data.currency.gte(new Decimal(500))
                 )
                     return true;
                 else
@@ -169,7 +169,7 @@ class Static {
               priceFormula: (x) => {
                   return new Decimal(
                       Math.floor(
-                           48000*(1.22**(x*1.15))
+                           22000*(1.22**(x*1.15))
                       )
                   );
               },
@@ -186,14 +186,14 @@ class Static {
             'snetwork': new Building({
               displayname:'Social Network',
               id:'snetwork',
-              baseIncome: new Decimal(7800),
+              baseIncome: new Decimal(12800),
               basePrice: new Decimal(10000),
               description: 'Steals data for you from users',
               img: 'network.png',
               priceFormula: (x) => {
                   return new Decimal(
                       Math.floor(
-                          160000*(1.24**(x*1.23))
+                          260000*(1.24**(x*1.23))
                       )
               );
               },
@@ -258,7 +258,7 @@ class Static {
                 description: "Wow, its like 2 CPUs in one!",
                 for: 'cpu',
                 img: 'dualcore.png',
-                price: new Decimal(100000),
+                price: new Decimal(40000),
                 applyTo: 'total',
                 effectDescription: 'Doubles income',
                 effect: (x) => {
@@ -286,7 +286,24 @@ class Static {
                     return x;
                 },
                 unveiler: () => { //:?Building
-                    return (window.game.data.upgrades.rgbcooler.unlocked);
+                    return (window.game.data.upgrades.infooutside.unlocked);
+                },
+            }),
+            'watercooler': new Upgrade({
+                id: 'watercooler',
+                displayname: 'Watercooler',
+                description: "What",
+                for: 'cpu',
+                img: 'watercooler.png',
+                price: new Decimal('9e+6'),
+                applyTo: 'total',
+                effectDescription: 'Triples the output',
+                effect: (x) => {
+                    x = x.times(3);
+                    return x;
+                },
+                unveiler: () => { //:?Building
+                    return (window.game.data.buildings.cpu.amount>=50);
                 },
             }),
             'link': new Upgrade({
@@ -329,6 +346,26 @@ class Static {
                         return false;
                 },
             }),
+            'ramstorage': new Upgrade({
+                id: 'ramstorage',
+                displayname: 'RAM as storage',
+                description: "M2 NVME is outdated. Gotta go fast!",
+                for: 'db',
+                img: 'ramstorage.png',
+                price: new Decimal('5e+6'),
+                applyTo: 'base',
+                effectDescription: 'Increases base income by 25 per RAM ',
+                effect: (x) => {
+                    x = x.add(new Decimal(window.game.data.buildings.ram.amount).times(25));
+                    return x;
+                },
+                unveiler: () => {
+                    return (
+                        window.game.data.buildings.db.amount>=35 &&
+                        window.game.data.buildings.ram.amount>=5
+                    )
+                },
+            }),
             'rgbcooler': new Upgrade({
                 id: 'rgbcooler',
                 displayname: '<span style="color:red">R</span><span style="color:green">G</span><span style="color:blue">B</span> cooler',
@@ -357,13 +394,64 @@ class Static {
                 img: 'qmaths.png',
                 price: new Decimal(10000),
                 applyTo: 'total',
+                effectDescription: 'Multiplies income by 3',
+                effect: (x) => {
+                    x = x.times(3);
+                    return x;
+                },
+                unveiler: () => {
+                    return (window.game.data.buildings.algorithm.amount>=5)
+                },
+            }),
+            'imgparser': new Upgrade({
+                id: 'imgparser',
+                displayname: 'Image parser',
+                description: "Collect data from countless cat pictures",
+                for: 'parser',
+                img: 'imgparser.png',
+                price: new Decimal(120000),
+                applyTo: 'total',
                 effectDescription: 'Multiplies income by 2',
                 effect: (x) => {
                     x = x.times(2);
                     return x;
                 },
                 unveiler: () => {
-                    return (window.game.data.buildings.algorithm.amount>=5)
+                    return (window.game.data.buildings.parser.amount>=5)
+                },
+            }),
+            'refactoring': new Upgrade({
+                id: 'refactoring',
+                displayname: 'Refactoring',
+                description: "Ugh, thats boring",
+                for: 'algorithm',
+                img: 'refactoring.png',
+                price: new Decimal(30000),
+                applyTo: 'total',
+                effectDescription: 'Multiplies income by 2',
+                effect: (x) => {
+                    x = x.times(2);
+                    return x;
+                },
+                unveiler: () => {
+                    return (window.game.data.buildings.algorithm.amount>=10)
+                },
+            }),
+            'feedbackloop': new Upgrade({
+                id: 'feedbackloop',
+                displayname: 'Positive feedback loop',
+                description: "Get more data by getting more data by getting more data",
+                for: 'algorithm',
+                img: 'feedbackloop.png',
+                price: new Decimal(30000),
+                applyTo: 'base',
+                effectDescription: 'Increases base income by 15 per each algorithm',
+                effect: (x) => {
+                    x = x.add(new Decimal(15).times(window.game.data.buildings.algorithm.amount));
+                    return x;
+                },
+                unveiler: () => {
+                    return (window.game.data.buildings.algorithm.amount>=20)
                 },
             }),
             'downloadram': new Upgrade({
@@ -420,7 +508,60 @@ class Static {
                 unveiler: () => {
                     return (
                         window.game.data.buildings.ram.amount >= 10 &&
-                        window.game.data.buildings.cpu.amount >= 60
+                        window.game.data.buildings.cpu.amount >= 50
+                    )
+                },
+            }),
+            'fisher': new Upgrade({
+                id: 'fisher',
+                displayname: 'Fisher',
+                description: "Share your fishy thoughts here",
+                for: 'snetwork',
+                img: 'fisher.png',
+                price: new Decimal(2500000),
+                applyTo: 'total',
+                effectDescription: 'Multiplies income by 2',
+                effect: (x) => {
+                    x = x.times(2);
+                    return x;
+                },
+                unveiler: () => {
+                    return (window.game.data.buildings.snetwork.amount>=5)
+                },
+            }),
+            'dissonance': new Upgrade({
+                id: 'dissonance',
+                displayname: 'Dissonance',
+                description: "Place to have heated gamer moments with friends",
+                for: 'snetwork',
+                img: 'dissonance.png',
+                price: new Decimal(15000000),
+                applyTo: 'total',
+                effectDescription: 'Multiplies income by 2',
+                effect: (x) => {
+                    x = x.times(2);
+                    return x;
+                },
+                unveiler: () => {
+                    return (window.game.data.buildings.snetwork.amount>=10)
+                },
+            }),
+            'developai': new Upgrade({
+                id: 'developai',
+                displayname: 'Create AI module',
+                description: "Teach your system how to gather data",
+                for: 'game',
+                img: 'ai.png',
+                price: new Decimal('1e+8'),
+                effectDescription: 'Unlocks ways to increase your data gain',
+                onPurchase: (x) => {
+                    $('[tab][key="rpg"]').show();
+                    window.game.data.rpg.unlocked = true;
+                    window.game.save();
+                },
+                unveiler: () => {
+                    return (
+                        window.game.data.currency.gte(new Decimal('1e+7'))
                     )
                 },
             }),

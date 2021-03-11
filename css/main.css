@@ -278,3 +278,8 @@ hl.inactive {
 .console span::before {
     content: '> ';
 }
+
+.extrapad {
+    padding-left: 40px;
+    padding-right: 40px;
+}
